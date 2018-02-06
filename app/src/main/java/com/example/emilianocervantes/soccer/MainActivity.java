@@ -1,5 +1,8 @@
 package com.example.emilianocervantes.soccer;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+//Navigation es para cuando se le presiona al menu
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,16 +36,19 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //Crea la referencia del drawer, que hacer cuando se abre y se cierra
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Obtener la referencia a el
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    //Que hacer cuando se presiona el back de android
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //Cual opcion fue presionada
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -74,14 +82,26 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //Obtener el id y regresa en donde fue
+    //Donde controlamos lo que se quiere
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment fragment = null;
+        //No se va a pegar como en el layout, se va a montar.
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            //Esta clase vamos a crear una transaccion para cargar al fragmento
+            FragmentManager fragmentManager = getFragmentManager();
+            //Creamos la transaccion a partir del manager
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            //Reemplazar donde quiero que se vea
+            fragmentTransaction.replace(R.id.uno, new UnoFragment());
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
