@@ -100,14 +100,9 @@ public class MainActivity extends AppCompatActivity
             //Creamos la transaccion a partir del manager
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             //Reemplazar donde quiero que se vea
-            fragmentTransaction.replace(R.id.uno, new UnoFragment());
+            fragmentTransaction.replace(R.id.uno, new MatchesListFragment());
             fragmentTransaction.commit();
 
-            //Montamos el Dos
-            fragmentTransaction = fragmentManager.beginTransaction();
-            //Reemplazar donde quiero que se vea
-            fragmentTransaction.replace(R.id.dos, new DosFragment(), "dos");
-            fragmentTransaction.commit();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
